@@ -24,7 +24,7 @@ void hexdump(const char* caption, void* ptr, int buflen) {
 }
 
 void dump_to_file(const char* name, void* data, size_t size) {
-    auto* output = fopen(name, "wb");
+    FILE* output = fopen(name, "wb");
     if (!output) {
         printf("failed to open output\n");
         exit(1);
@@ -42,8 +42,8 @@ void* memmem(void* haystack, size_t haystack_len, void* needle, size_t needle_le
     if (needle_len == 0) return NULL;
 
     for (const char* h = (const char*)haystack;
-        haystack_len >= needle_len;
-        ++h, --haystack_len) {
+            haystack_len >= needle_len;
+            ++h, --haystack_len) {
         if (!memcmp(h, needle, needle_len)) {
             return (void*)h;
         }
